@@ -1,21 +1,41 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import FlatListComponent from "./components/FlatListComponent";
-import MapComponent from "./components/MapComponent";
+import MapContainer from "./components/MapContainer";
 import "../assets/stylesheets/application.scss";
+import flats from "../data/flats";
 
-const App = () => {
-  return (
-    <div>
-      <div className="flat-list">
-        <FlatListComponent />
-      </div>
+class App extends React.Component {
+  state = {
+    flats: flats,
+    selectedFlat: {
+      name: "Bohemian and Chic in Paris",
+      imageUrl:
+        "https://raw.githubusercontent.com/lewagon/flats-boilerplate/master/images/flat6.jpg",
+      price: 90,
+      priceCurrency: "EUR",
+      lat: 48.827855,
+      lng: 2.350774
+    }
+  };
+
+  handleSelect = flat => {
+    // console.log(flat);
+    this.setState({ selectedFlat: flat });
+    // console.log(this.state);
+  };
+  render() {
+    const { flats, selectedFlat } = this.state;
+    return (
       <div>
-        <MapComponent />
+        <FlatListComponent flats={flats} onClick={this.handleSelect} />
+        <MapContainer
+          flat={{ center: { lat: selectedFlat.lat, lng: selectedFlat.lng } }}
+        />
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 const root = document.getElementById("root");
 if (root) {

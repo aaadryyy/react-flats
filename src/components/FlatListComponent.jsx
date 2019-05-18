@@ -1,20 +1,13 @@
 import React from "react";
 import FlatComponent from "./FlatComponent";
-import flats from "../../data/flats";
 
 class FlatListComponent extends React.Component {
   render() {
+    const { flats, onClick } = this.props;
     return (
-      <div className="card">
-        {flats.map(flat => {
-          return (
-            <FlatComponent
-              name={flat.name}
-              imageUrl={flat.imageUrl}
-              price={flat.price}
-              priceCurrency={flat.priceCurrency}
-            />
-          );
+      <div className="flat-list">
+        {flats.map((flat, key) => {
+          return <FlatComponent onClick={onClick} flat={flat} key={key} />;
         })}
       </div>
     );

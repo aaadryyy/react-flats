@@ -1,18 +1,21 @@
 import React from "react";
 
-const FlatComponent = ({ name, imageUrl, price, priceCurrency }) => {
+const FlatComponent = ({ flat, onClick }) => {
   return (
-    <div className="card-trip">
-      <img src={imageUrl} />
-      <div className="card-trip-infos">
-        <div>
-          <h2>{name}</h2>
-        </div>
-        <h2 className="card-trip-pricing">
-          {priceCurrency}
-          {price}
-        </h2>
+    <div
+      onClick={() => onClick(flat)}
+      className="card"
+      style={{
+        backgroundImage: `url(${flat.imageUrl})`
+      }}
+    >
+      <div className="card-category">
+        {flat.price} {flat.priceCurrency}
       </div>
+      <div className="card-description">
+        <h2>{flat.name}</h2>
+      </div>
+      <a className="card-link" href="#" />
     </div>
   );
 };
